@@ -4,16 +4,16 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import Interfaces.Trainable;
+import interfaces.Trainable;
 
 public class TrainingCamp {
 
-    private List<Trainable> registro = new ArrayList<>();
+    private List<Trainable> trainingList = new ArrayList<>();
 
-    public void aggiungi(String classeIn, String nome, int liv){
+    public void addHero(String classeIn, String name, int liv){
         try {
-            String nomePulito = classeIn.substring(0,1).toUpperCase() + classeIn.substring(1); //prima lettera maiusc, il resto normale
-            String percorso   = "models."+nomePulito;
+            String namePulito = classeIn.substring(0,1).toUpperCase() + classeIn.substring(1); //prima lettera maiusc, il resto normale
+            String percorso   = "models."+namePulito;
 
             //cerca la classe in base al percorso
             Class<?> classe = Class.forName(percorso);
@@ -24,11 +24,11 @@ public class TrainingCamp {
             //"cerca un costruttore che prende una Stringa e un int"
 
             //cast a Trainable, per farlo stare nella lista
-            Trainable nuovoEroe = (Trainable) costruttore.newInstance(nome, liv);
+            Trainable nuovoEroe = (Trainable) costruttore.newInstance(name, liv);
 
-            //lo posso finalmente aggiungere al registro
-            registro.add(nuovoEroe);
-            System.out.println("nuovo "+nomePulito+" aggiunto al registro del campo di addestramento!");
+            //lo posso finalmente aggiungere al trainingList
+            trainingList.add(nuovoEroe);
+            System.out.println("nuovo "+namePulito+" aggiunto al trainingList del campo di addestramento!");
 
         } catch (ClassNotFoundException e) {
             System.out.println("la classe dell'eroe "+classeIn+"non esiste nel package models.");
@@ -39,10 +39,10 @@ public class TrainingCamp {
         }
     }
 
-    public void aggiungi(String classeIn, String nome) {
+    public void addHero(String classeIn, String name) {
         try {
-            String nomePulito = classeIn.substring(0, 1).toUpperCase() + classeIn.substring(1); // prima lettera maiusc, il resto normale
-            String percorso = "models." + nomePulito;
+            String namePulito = classeIn.substring(0, 1).toUpperCase() + classeIn.substring(1); // prima lettera maiusc, il resto normale
+            String percorso = "models." + namePulito;
 
             // cerca la classe in base al percorso
             Class<?> classe = Class.forName(percorso);
@@ -53,11 +53,11 @@ public class TrainingCamp {
             // "cerca un costruttore che prende una Stringa"
 
             // cast a Trainable, per farlo stare nella lista
-            Trainable nuovoEroe = (Trainable) costruttore.newInstance(nome);
+            Trainable nuovoEroe = (Trainable) costruttore.newInstance(name);
 
-            // lo posso finalmente aggiungere al registro
-            registro.add(nuovoEroe);
-            System.out.println("nuovo " + nomePulito + " aggiunto al registro del campo di addestramento!");
+            // lo posso finalmente aggiungere al trainingList
+            trainingList.add(nuovoEroe);
+            System.out.println("nuovo " + namePulito + " aggiunto al trainingList del campo di addestramento!");
 
         } catch (ClassNotFoundException e) {
             System.out.println("la classe dell'eroe " + classeIn + "non esiste nel package models.");
@@ -68,14 +68,14 @@ public class TrainingCamp {
         }
     }
 
-    public void giornoAllenamento () {
-        for (Trainable t: registro) {
-            t.allena();
+    public void trainingDay () {
+        for (Trainable t: trainingList) {
+            t.train();
         }
     }
 
     public void recap () {
-        for (Trainable t: registro) {
+        for (Trainable t: trainingList) {
             System.out.println(t.toString());
         }
     }

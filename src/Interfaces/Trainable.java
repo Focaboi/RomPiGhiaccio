@@ -1,6 +1,6 @@
-package Interfaces;
+package interfaces;
 
 public interface Trainable {
 
-    public void allena ();
+    public void train ();
 }

@@ -1,11 +1,11 @@
 package models.items;
 
-import enums.TipoArma;
+import enums.WeaponType;
 
 public class Weapon extends Item{
     private final double MAX_ACC = 100;
     private final double MIN_ACC = 0;
-    private TipoArma tipo;
+    private WeaponType type;
     private double acc;
     private double dmg;
     
@@ -23,21 +23,21 @@ public class Weapon extends Item{
     public void setDmg(double dmg) {
         this.dmg = dmg;
     }
-    public TipoArma getTipo() {
-        return tipo;
+    public WeaponType getType() {
+        return type;
     }
-    public void setTipo(TipoArma tipo) {
-        this.tipo = tipo;
+    public void setType(WeaponType type) {
+        this.type = type;
     }
 
-    public Weapon(String nome, double peso, double valore, double acc, double dmg) {
-        super(nome, peso, valore);
+    public Weapon(String name, double weight, double value, double acc, double dmg) {
+        super(name, weight, value);
         setAcc(acc);
         this.dmg = dmg;
     }
     @Override
     public String toString() {
-        return super.toString() + "tipo: " + tipo + ", acc: " + acc + ", dmg: " + dmg;
+        return super.toString() + "type: " + type + ", acc: " + acc + ", dmg: " + dmg;
     }
 
     

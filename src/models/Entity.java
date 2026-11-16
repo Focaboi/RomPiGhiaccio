@@ -60,22 +60,22 @@ public abstract class Entity {
 
 
     //Constructor chain
-    public Entity(String nome, int liv, int hpMax) {
-        this(nome,liv, hpMax, 0.0);
+    public Entity(String name, int liv, int hpMax) {
+        this(name,liv, hpMax, 0.0);
     }
-    public Entity (String nome, int liv, int hpMax, double passo) {
+    public Entity (String name, int liv, int hpMax, double passo) {
         if (passo > 0.0) talentoVita = rollaTalentoVita(passo);
         else talentoVita = 1.0;
-        this.name = nome;
+        this.name = name;
         setLiv(liv);
         this.hpMax = Math.max(1, (int) Math.round(hpMax*talentoVita)) ; //cast a int, hpMax rischiava di passare per double,
         this.hp = this.hpMax;                                           //minimo 1 hpMax, a prescindere dalle riduzioni
     }
-    public Entity (String nome, int hpMax) {
-        this(nome,1, hpMax);
+    public Entity (String name, int hpMax) {
+        this(name,1, hpMax);
     }
-    public Entity (String nome, int hpMax, double passo) {
-        this(nome, 1, hpMax, passo);
+    public Entity (String name, int hpMax, double passo) {
+        this(name, 1, hpMax, passo);
     }
 
     

@@ -7,67 +7,55 @@ import models.items.Item;
 
 public class Inventory {
 
-    private static final double MAX_WEIGHT = 30000;
+    private static final double MAX_LOAD = 30000;
 
-    private List<Item> bisaccia;
-    private double carico;
+    private List<Item> items;
+    private double currentLoad;
 
     public static double getMaxWeight() {
-        return MAX_WEIGHT;
+        return MAX_LOAD;
     }
-
     public double getCarico() {
-        return carico;
+        return currentLoad;
     }
-
-    private void setCarico(double carico) {
-        this.carico = carico;
+    private void setCarico(double currentLoad) {
+        this.currentLoad = currentLoad;
     }
-
+    
     public Inventory() {
-        this.bisaccia = new ArrayList<>();
+        this.items = new ArrayList<>();
         setCarico(0);
     }
 
-    public void mostraOggetti() {
-        for (Item i : bisaccia) {
+    public void showItems() {
+        for (Item i : items) {
             System.out.println(i.toString());
         }
     }
 
-    public void aggiungiOggetto(Item oggetto) {
+    public void addItem(Item oggetto) {
         if (oggetto == null) {
             System.out.println("Impossibile aggiungere un oggetto nullo.");
             return;
         }
-        if (oggetto.getPeso() + getCarico() <= getMaxWeight()) {
-            bisaccia.add(oggetto);
-            setCarico(carico + oggetto.getPeso());
+        if (oggetto.getWeight() + getCarico() <= getMaxWeight()) {
+            items.add(oggetto);
+            setCarico(currentLoad + oggetto.getWeight());
         } else
-            System.out.println("il peso trasportabile non può eccedere i 30 Kg");
+            System.out.println("il weight trasportabile non può eccedere i 30 Kg");
     }
 
-    public void rimuoviOggetto(Item oggetto) {
-        if (bisaccia.remove(oggetto))
-            setCarico(carico - oggetto.getPeso()); // sfrutta il booleano e i cicli nativi del remove
+    public void removeItem(Item oggetto) {
+        if (items.remove(oggetto))
+            setCarico(currentLoad - oggetto.getWeight()); // sfrutta il booleano e i cicli nativi del remove
         else
             System.out.println("Oggetto non presente nell'inventario.");
     }
-    // public void rimuoviOggetto (Item oggetto) { //carino ma usa due volte cicli
-    // innecessariamente, remove(var1) cicla già
-    // for (Item i : bisaccia) {
-    // if (i.equals(oggetto)) {
-    // bisaccia.remove(i);
-    // setCarico(carico - i.getPeso());
-    // return;
-    // }
-    // }
-    // System.out.println("Oggetto non presente nell'inventario.");
-    // }
-    public void stampaPesoG() {
-        System.out.println("il peso complessivo degli bisaccia in questo inventario è di: " + getCarico()+"g");
+   
+    public void stampaWeightG() {
+        System.out.println("il weight complessivo degli items in questo inventario è di: " + getCarico()+"g");
     }
-    public void stampaPesoKg() {
-        System.out.println("il peso complessivo degli bisaccia in questo inventario è di: " + getCarico()/1000+"Kg");
+    public void stampaWeightKg() {
+        System.out.println("il weight complessivo degli items in questo inventario è di: " + getCarico()/1000+"Kg");
     }
 }

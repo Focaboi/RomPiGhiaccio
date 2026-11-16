@@ -1,13 +1,13 @@
 package models;
 
-import Interfaces.Consumable;
-import Interfaces.Trainable;
+import interfaces.Consumable;
+import interfaces.Trainable;
 import models.items.Item;
 import utility.Inventory;
 
 public abstract class Hero extends Entity implements Trainable {
     
-    private Inventory inventario;
+    private Inventory inventory;
 
     private static final double PASSO_HP_EROI = 0.075;
 
@@ -15,23 +15,23 @@ public abstract class Hero extends Entity implements Trainable {
     public static double getPassoHpEroi() {
         return PASSO_HP_EROI;
     }
-    public Inventory getInventario() {
-        return inventario;
+    public Inventory getInventory() {
+        return inventory;
     }
 
     //Constructor chain
-    public Hero (String nome, int liv, int hpMax, double passo) {
-        super(nome, liv, hpMax, passo);
-        this.inventario = new Inventory();
+    public Hero (String name, int liv, int hpMax, double passo) {
+        super(name, liv, hpMax, passo);
+        this.inventory = new Inventory();
     }
-    public Hero (String nome, int hpMax, double passo) {
-        this(nome, 1, hpMax, passo);
+    public Hero (String name, int hpMax, double passo) {
+        this(name, 1, hpMax, passo);
     }
-    public Hero(String nome, int liv, int hpMax) {
-        this(nome,liv, hpMax, PASSO_HP_EROI);
+    public Hero(String name, int liv, int hpMax) {
+        this(name,liv, hpMax, PASSO_HP_EROI);
     }
-    public Hero (String nome, int hpMax) {
-        this(nome,1, hpMax, PASSO_HP_EROI);
+    public Hero (String name, int hpMax) {
+        this(name,1, hpMax, PASSO_HP_EROI);
     }
     
 
@@ -42,21 +42,21 @@ public abstract class Hero extends Entity implements Trainable {
     }
 
     public void raccogli(Item oggetto) {
-        getInventario().aggiungiOggetto(oggetto);
+        getInventory().addItem(oggetto);
     }
 
     public void lascia(Item oggetto) {
-        getInventario().rimuoviOggetto(oggetto);
+        getInventory().removeItem(oggetto);
     }
 
-    public void mostraInventario() {
-        getInventario().mostraOggetti();
-        getInventario().stampaPesoKg();
+    public void mostraInventory() {
+        getInventory().showItems();
+        getInventory().stampaWeightKg();
     }
 
-    public void consuma(Consumable oggetto) { //così posso chiamare più naturalmente la consumazione
+    public void consume(Consumable oggetto) { //così posso chiamare più naturalmente la consumezione
         if (oggetto != null) {
-            oggetto.applicaEffetto(this);
+            oggetto.applyEffect(this);
         }
     }
 }

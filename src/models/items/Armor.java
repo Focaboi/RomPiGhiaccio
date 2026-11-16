@@ -1,20 +1,20 @@
 package models.items;
 
-import enums.TipoArmor;
+import enums.ArmorType;
 
 public class Armor extends Item {
 
     private static double MAX_BLOCK_CHANCE = 100;
     private static double MIN_BLOCK_CHANCE = 0;
-    private TipoArmor tipo;
+    private ArmorType type;
     private double blockChance;
     private double dmgRed;
 
-    public TipoArmor getTipo() {
-        return tipo;
+    public ArmorType getType() {
+        return type;
     }
-    public void setTipo(TipoArmor tipo) {
-        this.tipo = tipo;
+    public void setType(ArmorType type) {
+        this.type = type;
     }
     public double getBlockChance() {
         return blockChance;
@@ -34,9 +34,9 @@ public class Armor extends Item {
         this.dmgRed = dmgRed;
     }
 
-    public Armor(String nome, double peso, double valore, TipoArmor tipo, double blockChance, double dmgRed) {
-        super(nome, peso, valore);
-        this.tipo = tipo;
+    public Armor(String name, double weight, double value, ArmorType type, double blockChance, double dmgRed) {
+        super(name, weight, value);
+        this.type = type;
         setBlockChance(blockChance);
         this.dmgRed = dmgRed;
     }

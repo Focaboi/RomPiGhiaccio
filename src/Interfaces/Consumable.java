@@ -1,8 +1,8 @@
-package Interfaces;
+package interfaces;
 
 import models.Hero;
 
 public interface Consumable {
     
-    public void applicaEffetto (Hero bersaglio);
+    public void applyEffect (Hero bersaglio);
 }
