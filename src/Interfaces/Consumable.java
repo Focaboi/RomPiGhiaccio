@@ -1,6 +1,6 @@
 package interfaces;
 
-import models.Hero;
+import models.adventurers.Hero;
 
 public interface Consumable {
     

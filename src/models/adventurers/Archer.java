@@ -1,19 +1,19 @@
-package models;
+package models.adventurers;
 
 public class Archer extends Hero {
 
     // Constructor chain
-    public Archer (String name, int liv, int hpMax, double passo) {
-        super(name, liv, hpMax, passo);
+    public Archer (String name, int liv, int hpMax, double step) {
+        super(name, liv, hpMax, step);
     }
-    public Archer (String name, int hpMax, double passo) {
-        this(name, 1, hpMax, passo);
+    public Archer (String name, int hpMax, double step) {
+        this(name, 1, hpMax, step);
     }
     public Archer(String name, int liv, int hpMax) {
-        this(name,liv, hpMax, getPassoHpEroi());
+        this(name,liv, hpMax, getStepHpEroi());
     }
     public Archer (String name, int hpMax) {
-        this(name,1, hpMax, getPassoHpEroi());
+        this(name,1, hpMax, getStepHpEroi());
     }
 
     @Override

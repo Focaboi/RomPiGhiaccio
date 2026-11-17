@@ -1,7 +1,7 @@
 package models.items;
 
 import interfaces.Consumable;
-import models.Hero;
+import models.adventurers.Hero;
 
 public class Potion extends Item implements Consumable {
 
@@ -33,6 +33,6 @@ public class Potion extends Item implements Consumable {
     @Override
     public void applyEffect(Hero bersaglio) {
         bersaglio.getInventory().removeItem(this);
-        bersaglio.raccogli(new Misc("Fiaschetta vuota", 30, 1));
+        bersaglio.pick(new Misc("Fiaschetta vuota", 30, 1));
     }
 }

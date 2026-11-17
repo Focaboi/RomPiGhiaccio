@@ -1,7 +1,8 @@
-package models;
+package models.adventurers;
 
 import interfaces.Consumable;
 import interfaces.Trainable;
+import models.Entity;
 import models.items.Item;
 import utility.Inventory;
 
@@ -12,7 +13,7 @@ public abstract class Hero extends Entity implements Trainable {
     private static final double PASSO_HP_EROI = 0.075;
 
     
-    public static double getPassoHpEroi() {
+    public static double getStepHpEroi() {
         return PASSO_HP_EROI;
     }
     public Inventory getInventory() {
@@ -20,12 +21,12 @@ public abstract class Hero extends Entity implements Trainable {
     }
 
     //Constructor chain
-    public Hero (String name, int liv, int hpMax, double passo) {
-        super(name, liv, hpMax, passo);
+    public Hero (String name, int liv, int hpMax, double step) {
+        super(name, liv, hpMax, step);
         this.inventory = new Inventory();
     }
-    public Hero (String name, int hpMax, double passo) {
-        this(name, 1, hpMax, passo);
+    public Hero (String name, int hpMax, double step) {
+        this(name, 1, hpMax, step);
     }
     public Hero(String name, int liv, int hpMax) {
         this(name,liv, hpMax, PASSO_HP_EROI);
@@ -41,11 +42,11 @@ public abstract class Hero extends Entity implements Trainable {
         return classe + " " + getName() + " liv: " + getLiv();
     }
 
-    public void raccogli(Item oggetto) {
+    public void pick(Item oggetto) {
         getInventory().addItem(oggetto);
     }
 
-    public void lascia(Item oggetto) {
+    public void drop(Item oggetto) {
         getInventory().removeItem(oggetto);
     }
 

@@ -15,16 +15,16 @@ public class Inventory {
     public static double getMaxWeight() {
         return MAX_LOAD;
     }
-    public double getCarico() {
+    public double getLoad() {
         return currentLoad;
     }
-    private void setCarico(double currentLoad) {
+    private void setLoad(double currentLoad) {
         this.currentLoad = currentLoad;
     }
     
     public Inventory() {
         this.items = new ArrayList<>();
-        setCarico(0);
+        setLoad(0);
     }
 
     public void showItems() {
@@ -38,24 +38,24 @@ public class Inventory {
             System.out.println("Impossibile aggiungere un oggetto nullo.");
             return;
         }
-        if (oggetto.getWeight() + getCarico() <= getMaxWeight()) {
+        if (oggetto.getWeight() + getLoad() <= getMaxWeight()) {
             items.add(oggetto);
-            setCarico(currentLoad + oggetto.getWeight());
+            setLoad(currentLoad + oggetto.getWeight());
         } else
             System.out.println("il weight trasportabile non può eccedere i 30 Kg");
     }
 
     public void removeItem(Item oggetto) {
         if (items.remove(oggetto))
-            setCarico(currentLoad - oggetto.getWeight()); // sfrutta il booleano e i cicli nativi del remove
+            setLoad(currentLoad - oggetto.getWeight()); // sfrutta il booleano e i cicli nativi del remove
         else
             System.out.println("Oggetto non presente nell'inventario.");
     }
    
     public void stampaWeightG() {
-        System.out.println("il weight complessivo degli items in questo inventario è di: " + getCarico()+"g");
+        System.out.println("il weight complessivo degli items in questo inventario è di: " + getLoad()+"g");
     }
     public void stampaWeightKg() {
-        System.out.println("il weight complessivo degli items in questo inventario è di: " + getCarico()/1000+"Kg");
+        System.out.println("il weight complessivo degli items in questo inventario è di: " + getLoad()/1000+"Kg");
     }
 }

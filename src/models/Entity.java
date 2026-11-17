@@ -12,12 +12,12 @@ public abstract class Entity {
 
     private static final int LIV_CAP = 100;
 
-    public static double rollaTalentoVita (double passo) { //lo scaling del calcolo, ogni +1 = 0.10, 0.20 ecc.
+    public static double rollaTalentoVita (double step) { //lo scaling del calcolo, ogni +1 = 0.10, 0.20 ecc.
         int tiro = Dice.roll(10);
         double modificatore = 0.0;
 
-        if (tiro <= 4) modificatore -= (5-tiro)*passo;
-        if (tiro >  6) modificatore += (tiro-6)*passo;
+        if (tiro <= 4) modificatore -= (5-tiro)*step;
+        if (tiro >  6) modificatore += (tiro-6)*step;
         return Math.max(0.1, 1 + modificatore); //non può mai scendere sotto 0.1, cioè il 10% degli hpMax
     }
 
@@ -63,8 +63,8 @@ public abstract class Entity {
     public Entity(String name, int liv, int hpMax) {
         this(name,liv, hpMax, 0.0);
     }
-    public Entity (String name, int liv, int hpMax, double passo) {
-        if (passo > 0.0) talentoVita = rollaTalentoVita(passo);
+    public Entity (String name, int liv, int hpMax, double step) {
+        if (step > 0.0) talentoVita = rollaTalentoVita(step);
         else talentoVita = 1.0;
         this.name = name;
         setLiv(liv);
@@ -74,8 +74,8 @@ public abstract class Entity {
     public Entity (String name, int hpMax) {
         this(name,1, hpMax);
     }
-    public Entity (String name, int hpMax, double passo) {
-        this(name, 1, hpMax, passo);
+    public Entity (String name, int hpMax, double step) {
+        this(name, 1, hpMax, step);
     }
 
     

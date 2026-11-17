@@ -1,19 +1,19 @@
-package models;
+package models.adventurers;
 
 public class Mage extends Hero {
     
     // Constructor chain
-    public Mage (String name, int liv, int hpMax, double passo) {
-        super(name, liv, hpMax, passo);
+    public Mage (String name, int liv, int hpMax, double step) {
+        super(name, liv, hpMax, step);
     }
-    public Mage (String name, int hpMax, double passo) {
-        this(name, 1, hpMax, passo);
+    public Mage (String name, int hpMax, double step) {
+        this(name, 1, hpMax, step);
     }
     public Mage (String name, int liv, int hpMax) {
-        this(name,liv, hpMax, getPassoHpEroi());
+        this(name,liv, hpMax, getStepHpEroi());
     }
     public Mage (String name, int hpMax) {
-        this(name,1, hpMax, getPassoHpEroi());
+        this(name,1, hpMax, getStepHpEroi());
     }
 
      @Override
