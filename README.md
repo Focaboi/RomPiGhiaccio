@@ -14,7 +14,16 @@ un gioco di ruolo (Role Playing Game, RPG) a turni, con elementi procedurali, ne
 
 ### Stato dell'arte
 
-ad è presente una struttura gerarchica con classi e poche interfacce, un sistema di dadi e una prima implementazione di talenti per stabilire casualmente o arbitrariamente le statistiche di mostri ed eroi, un inventario per custodire gli oggetti.
+Il progetto è attualmente in fase di sviluppo.
+Sono presenti:
+
+- Una gerarchia di entità e cinque classi di avventurieri.
+- Un sistema di generazione casuale delle statistiche tramite dadi e talenti.
+- Una prima implementazione di inventario e gestione degli oggetti.
+- Modelli per armi, armature, pozioni e oggetti generici.
+- Un sistema preliminare di addestramento e progressione dei livelli.
+
+Il sistema di combattimento, la gestione completa degli effetti degli oggetti e la generazione degli incontri sono ancora in fase di progettazione e sviluppo.
 
 ### Roadmap
 
