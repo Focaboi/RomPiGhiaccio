@@ -8,31 +8,42 @@ import utility.Inventory;
 
 public abstract class Hero extends Entity implements Trainable {
     
-    private Inventory inventory;
+    private int xp;
+    private int xpCeil;
+    private final Inventory inventory;
 
-    private static final double PASSO_HP_EROI = 0.075;
+    private static final double STEP_HP_HEROES = 0.075;
+    private static final int BASE_XP_REQ = 100;
 
     
-    public static double getStepHpEroi() {
-        return PASSO_HP_EROI;
+    public static double getStepHpHeroes() {
+        return STEP_HP_HEROES;
     }
     public Inventory getInventory() {
         return inventory;
+    }
+    public int getXp() {
+        return xp;
+    }
+    public int getXpCeil() {
+        return xpCeil;
     }
 
     //Constructor chain
     public Hero (String name, int liv, int hpMax, double step) {
         super(name, liv, hpMax, step);
         this.inventory = new Inventory();
+        this.xp = 0;
+        this.xpCeil = xpCurve(this.getLiv());
     }
     public Hero (String name, int hpMax, double step) {
         this(name, 1, hpMax, step);
     }
     public Hero(String name, int liv, int hpMax) {
-        this(name,liv, hpMax, PASSO_HP_EROI);
+        this(name,liv, hpMax, STEP_HP_HEROES);
     }
     public Hero (String name, int hpMax) {
-        this(name,1, hpMax, PASSO_HP_EROI);
+        this(name,1, hpMax, STEP_HP_HEROES);
     }
     
 
@@ -42,22 +53,33 @@ public abstract class Hero extends Entity implements Trainable {
         return classe + " " + getName() + " liv: " + getLiv();
     }
 
-    public void pick(Item oggetto) {
-        getInventory().addItem(oggetto);
+    public void pick(Item item) {
+        getInventory().addItem(item);
     }
 
-    public void drop(Item oggetto) {
-        getInventory().removeItem(oggetto);
+    public void drop(Item item) {
+        getInventory().removeItem(item);
     }
 
-    public void mostraInventory() {
-        getInventory().showItems();
-        getInventory().stampaWeightKg();
+    public String showInventory() {
+        String message ="";
+        message += getInventory().showItems() + "\n";
+        message += "Il carico attuale è di " + getInventory().getLoad()/1000.0 + "Kg";
+        return message;
     }
 
-    public void consume(Consumable oggetto) { //così posso chiamare più naturalmente la consumezione
-        if (oggetto != null) {
-            oggetto.applyEffect(this);
+    private int xpCurve (int liv) {
+        return (int) (BASE_XP_REQ * Math.pow(liv, 1.5));
+    }
+
+    public void consume(Consumable item) { //così posso chiamare più naturalmente la consumezione
+        if (item != null) {
+            item.applyEffect(this);
         }
+    }
+
+    @Override
+    public void train () {
+
     }
 }

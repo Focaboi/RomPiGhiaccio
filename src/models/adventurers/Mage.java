@@ -10,10 +10,10 @@ public class Mage extends Hero {
         this(name, 1, hpMax, step);
     }
     public Mage (String name, int liv, int hpMax) {
-        this(name,liv, hpMax, getStepHpEroi());
+        this(name,liv, hpMax, getStepHpHeroes());
     }
     public Mage (String name, int hpMax) {
-        this(name,1, hpMax, getStepHpEroi());
+        this(name,1, hpMax, getStepHpHeroes());
     }
 
      @Override

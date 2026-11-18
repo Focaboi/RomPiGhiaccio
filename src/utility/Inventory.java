@@ -27,35 +27,30 @@ public class Inventory {
         setLoad(0);
     }
 
-    public void showItems() {
+    public String showItems() {
+        String message ="";
         for (Item i : items) {
-            System.out.println(i.toString());
+            message += i.toString();
         }
+        return message;
     }
 
-    public void addItem(Item oggetto) {
-        if (oggetto == null) {
+    public void addItem(Item item) {
+        if (item == null) {
             System.out.println("Impossibile aggiungere un oggetto nullo.");
             return;
         }
-        if (oggetto.getWeight() + getLoad() <= getMaxWeight()) {
-            items.add(oggetto);
-            setLoad(currentLoad + oggetto.getWeight());
+        if (item.getWeight() + getLoad() <= getMaxWeight()) {
+            items.add(item);
+            setLoad(currentLoad + item.getWeight());
         } else
-            System.out.println("il weight trasportabile non può eccedere i 30 Kg");
+            System.out.println("il peso trasportabile non può eccedere i 30 Kg");
     }
 
-    public void removeItem(Item oggetto) {
-        if (items.remove(oggetto))
-            setLoad(currentLoad - oggetto.getWeight()); // sfrutta il booleano e i cicli nativi del remove
+    public void removeItem(Item item) {
+        if (items.remove(item))
+            setLoad(currentLoad - item.getWeight()); // sfrutta il booleano e i cicli nativi del remove
         else
             System.out.println("Oggetto non presente nell'inventario.");
-    }
-   
-    public void stampaWeightG() {
-        System.out.println("il weight complessivo degli items in questo inventario è di: " + getLoad()+"g");
-    }
-    public void stampaWeightKg() {
-        System.out.println("il weight complessivo degli items in questo inventario è di: " + getLoad()/1000+"Kg");
     }
 }

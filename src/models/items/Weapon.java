@@ -3,12 +3,19 @@ package models.items;
 import enums.WeaponType;
 
 public class Weapon extends Item{
-    private final double MAX_ACC = 100;
-    private final double MIN_ACC = 0;
+    private static final double MAX_ACC = 100;
+    private static final double MIN_ACC = 0;
     private WeaponType type;
     private double acc;
     private double dmg;
     
+    public static double getMaxAcc() {
+        return MAX_ACC;
+    }
+    public static double getMinAcc() {
+        return MIN_ACC;
+    }
+
     public double getAcc() {
         return acc;
     }
@@ -30,15 +37,14 @@ public class Weapon extends Item{
         this.type = type;
     }
 
-    public Weapon(String name, double weight, double value, double acc, double dmg) {
+    public Weapon(String name, WeaponType type, double weight, double value, double acc, double dmg) {
         super(name, weight, value);
         setAcc(acc);
         this.dmg = dmg;
+        this.type = type;
     }
     @Override
     public String toString() {
-        return super.toString() + "type: " + type + ", acc: " + acc + ", dmg: " + dmg;
-    }
-
-    
+        return super.toString() + "type: " + type.getDisplayName() + ", acc: " + acc + ", dmg: " + dmg;
+    }  
 }
