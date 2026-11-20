@@ -1,9 +1,7 @@
-package utility;
+package models.items;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import models.items.Item;
 
 public class Inventory {
 
