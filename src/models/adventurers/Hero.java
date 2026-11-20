@@ -5,15 +5,14 @@ import interfaces.Trainable;
 import models.Entity;
 import models.items.Inventory;
 import models.items.Item;
-import utility.Inventory;
 
 public abstract class Hero extends Entity implements Trainable {
     
     private int xp;
     private int xpCeil;
-private double trainMult = 0.1;   //moltiplicatore allenamento, parte da 10% modificabile inGame
+    private double trainMult = 0.1;   //moltiplicatore allenamento, parte da 10% modificabile inGame
     private final Inventory inventory;
-
+    
 
     private static final double STEP_HP_HEROES = 0.075;
     private static final int BASE_XP_REQ = 100;
@@ -28,31 +27,34 @@ private double trainMult = 0.1;   //moltiplicatore allenamento, parte da 10% mod
     public int getXp() {
         return xp;
     }
-public void setXp (int xp) {
+    public void setXp (int xp) {
         this.xp = xp;
     }
     public int getXpCeil() {
         return xpCeil;
     }
-public void setXpCeil (int xpCeil) {
+    public void setXpCeil (int xpCeil) {
         this.xpCeil = xpCeil;
     }
 
     //Constructor chain
-    public Hero (String name, int liv, int hpMax, double step) {
-        super(name, liv, hpMax, step);
+    public Hero(String name, int liv, double step, int baseDamage, double baseEvasion) {
+        super(name, liv, step, baseDamage, baseEvasion);
         this.inventory = new Inventory();
         this.xp = 0;
         this.xpCeil = xpCurve(this.getLiv());
     }
-    public Hero (String name, int hpMax, double step) {
-        this(name, 1, hpMax, step);
+    public Hero(String name, int liv, double step) {
+        this(name, liv, step, getBASE_DMG(),getBASE_EVD());
     }
-    public Hero(String name, int liv, int hpMax) {
-        this(name,liv, hpMax, STEP_HP_HEROES);
+    public Hero (String name, double step) {
+        this(name, 1, step);
     }
-    public Hero (String name, int hpMax) {
-        this(name,1, hpMax, STEP_HP_HEROES);
+    public Hero(String name, int liv) {
+        this(name,liv, STEP_HP_HEROES);
+    }
+    public Hero (String name) {
+        this(name,1, STEP_HP_HEROES);
     }
     
 
@@ -108,7 +110,7 @@ public void setXpCeil (int xpCeil) {
 
     @Override
     public void train () {
-int xp = (int)(getXp()*trainMult);
+        int xp = (int)(getXp()*trainMult);
         System.out.println("hai ottenuto "+ xp +" xp");
         gainXp(xp);
     }
