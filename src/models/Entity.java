@@ -58,7 +58,12 @@ public abstract class Entity {
         return hp;
     }
     public void setHp(int hp) {
-        this.hp = hp;
+        if (hp >= hpMax) 
+            this.hp = hpMax;
+        else if (hp <= 0) {
+            this.hp = 0;
+            setAlive(false);
+        } else this.hp = hp;
     }
     public int getBaseDamage() {
         return baseDamage;
@@ -70,9 +75,9 @@ public abstract class Entity {
         return baseEvasion;
     }
      public void setBaseEvasion(double evd) {
-        if (baseEvasion >= MAX_EVASION)
+        if (evd >= MAX_EVASION)
             this.baseEvasion = MAX_EVASION;
-        else if (baseEvasion <= MIN_EVASION)
+        else if (evd <= MIN_EVASION)
             this.baseEvasion = MIN_EVASION;
         else
             this.baseEvasion = evd;
@@ -113,10 +118,10 @@ public abstract class Entity {
         else talentoVita = 1.0;
         this.name = name;
         setLiv(liv);
-        this.hpMax = Math.max(1, (int) Math.round(hpCurve(liv)*talentoVita)) ; //cast a int, hpMax rischiava di passare per double,
+        this.hpMax = Math.max(1, (int) Math.round(hpCurve(this.liv)*talentoVita)); //min 1 hpMax, a prescindere dalle riduzioni
         this.hp = this.hpMax;
         this.baseDamage = baseDamage;
-        this.baseEvasion = baseEvasion;                                                  //minimo 1 hpMax, a prescindere dalle riduzioni
+        this.baseEvasion = baseEvasion;                                                  
         this.alive = true;                                   
     }
     public Entity(String name, int liv, int baseDamage, double baseEvasion) {
@@ -140,6 +145,10 @@ public abstract class Entity {
     }
 
     public void takeDamage (int dmg) {
+        if (!isAlive()) {
+            System.out.println(getName()+" è morto.");
+            return;
+        }
         if (getHp() <= dmg) {
             setAlive(false);
             setHp (0);
