@@ -10,6 +10,7 @@ public abstract class Entity {
 
     private final double talentoVita;
 
+    private static final int BASE_HP_MAX = 80;
     private static final int LIV_CAP = 100;
 
     public static double rollaTalentoVita (double step) { //lo scaling del calcolo, ogni +1 = 0.10, 0.20 ecc.
@@ -54,6 +55,9 @@ public abstract class Entity {
     public int getLIV_CAP() {
         return LIV_CAP;
     }
+public int getBASE_HP_MAX() {
+        return BASE_HP_MAX;
+    }
     public double getTalentoVita() {
         return talentoVita;
     }
@@ -74,9 +78,7 @@ public abstract class Entity {
     public Entity (String name, int hpMax) {
         this(name,1, hpMax);
     }
-    public Entity (String name, int hpMax, double step) {
-        this(name, 1, hpMax, step);
+    public int hpCurve (int liv) {
+        return (int) (BASE_HP_MAX * Math.pow(liv, 1.5));
     }
-
-    
 }

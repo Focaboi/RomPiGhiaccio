@@ -3,17 +3,17 @@ package models.adventurers;
 public class Warrior extends Hero{
 
     // Constructor chain
-    public Warrior (String name, int liv, int hpMax, double step) {
-        super(name, liv, hpMax, step);
+    public Warrior (String name, int liv, double step) {
+        super(name, liv, step);
     }
-    public Warrior (String name, int hpMax, double step) {
-        this(name, 1, hpMax, step);
+    public Warrior (String name, double step) {
+        this(name, 1, step);
     }
-    public Warrior (String name, int liv, int hpMax) {
-        this(name,liv, hpMax, getStepHpHeroes());
+    public Warrior (String name, int liv) {
+        this(name,liv, getStepHpHeroes());
     }
-    public Warrior (String name, int hpMax) {
-        this(name,1, hpMax, getStepHpHeroes());
+    public Warrior (String name) {
+        this(name,1, getStepHpHeroes());
     }
 
     @Override
