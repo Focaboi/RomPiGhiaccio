@@ -3,6 +3,7 @@ package models.adventurers;
 import interfaces.Consumable;
 import interfaces.Trainable;
 import models.Entity;
+import models.items.Inventory;
 import models.items.Item;
 import utility.Inventory;
 
@@ -10,7 +11,9 @@ public abstract class Hero extends Entity implements Trainable {
     
     private int xp;
     private int xpCeil;
+private double trainMult = 0.1;   //moltiplicatore allenamento, parte da 10% modificabile inGame
     private final Inventory inventory;
+
 
     private static final double STEP_HP_HEROES = 0.075;
     private static final int BASE_XP_REQ = 100;
@@ -25,8 +28,14 @@ public abstract class Hero extends Entity implements Trainable {
     public int getXp() {
         return xp;
     }
+public void setXp (int xp) {
+        this.xp = xp;
+    }
     public int getXpCeil() {
         return xpCeil;
+    }
+public void setXpCeil (int xpCeil) {
+        this.xpCeil = xpCeil;
     }
 
     //Constructor chain
@@ -78,8 +87,29 @@ public abstract class Hero extends Entity implements Trainable {
         }
     }
 
+    public void gainXp (int xp) {
+        setXp(getXp() + xp);
+        while (getXp() >= getXpCeil()) {
+            if (getLiv() >= getLIV_CAP()) break;
+            levelUp();
+        }
+    }
+
+    public void levelUp () {
+        if (getLiv() >= getLIV_CAP()) return;
+
+        int newLiv = getLiv() + 1;
+    
+        System.out.println(getName()+" sale di livello.");
+        setLiv(newLiv);
+        setHpMax((int) Math.round(hpCurve(newLiv)*getTalentoVita())); // levelup NON cura il pg
+        setXpCeil(xpCurve(newLiv));
+    }
+
     @Override
     public void train () {
-
+int xp = (int)(getXp()*trainMult);
+        System.out.println("hai ottenuto "+ xp +" xp");
+        gainXp(xp);
     }
 }
