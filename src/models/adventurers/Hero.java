@@ -107,7 +107,7 @@ public abstract class Hero extends Entity implements Trainable {
         setHpMax((int) Math.round(hpCurve(newLiv)*getTalentoVita())); // levelup NON cura il pg
         setXpCeil(xpCurve(newLiv));
     }
-
+    
     @Override
     public void train () {
         int xp = (int)(getXp()*trainMult);
